@@ -19,7 +19,8 @@
     fd
     htop
     fastfetch
-    
+    lazygit
+
     gimp
     libreoffice-qt6-fresh
     teams
