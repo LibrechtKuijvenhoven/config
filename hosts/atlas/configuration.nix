@@ -126,10 +126,7 @@
     pciutils  # provides lspci
   ];
 
-  fonts.packages = with pkgs; [
-	nerd-fonts.geist-mono
-  ];
-  console.font = "nerd-fonts.geist-mono";
+  fonts.fontDir.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
