@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  programs.nixvim = {
-    # Enable Neovim's built-in LSP client
     plugins.lsp = {
       enable = true;
       servers = {
@@ -20,7 +18,7 @@
         eslint.enable = true; # For ESLint (requires nodePackages.eslint_d)
 
         # Nix
-        nil.enable = true; # Assuming you have `nil` installed in home.packages
+        nixd.enable = true; # Assuming you have `nil` installed in home.packages
         # nixd.enable = true; # If using nixd instead of nil
       };
 
@@ -40,5 +38,4 @@
     #     ];
     #   };
     # };
-  };
 }

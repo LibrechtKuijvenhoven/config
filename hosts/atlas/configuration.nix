@@ -60,6 +60,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -108,6 +109,15 @@
 #      "librechtk" = import ./home.nix;
 #    };
 #  };
+  hardware.nvidia = {
+      modesetting.enable = true; # Recommended for newer GPUs and features
+      powerManagement.enable = false; # Often causes issues
+      # open = true; # ONLY enable if you want to use the new open-source kernel modules
+      # package = config.boot.kernelPackages.nvidiaPackages.stable; # Use stable if unsure
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      nvidiaSettings = true;
+      open = true;
+    };
 
   # Install brave.
   # programs.brave.enable = true;
@@ -124,6 +134,12 @@
     blueman
     usbutils  # provides lsusb
     pciutils  # provides lspci
+    libva-vdpau-driver
+    libva-utils
+    vdpauinfo
+
+    vulkan-loader
+    vulkan-tools
   ];
 
   fonts.fontDir.enable = true;
@@ -148,6 +164,10 @@
     settings.PasswordAuthentication = false;
   };
 
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
   
   hardware.bluetooth = {
     enable = true;

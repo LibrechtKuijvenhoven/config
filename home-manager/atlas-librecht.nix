@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./shared-home.nix
+    ./shared.nix
   ];
 
   # Desktop-specific Home Manager packages
@@ -12,4 +12,4 @@
     steam
     # Add any other packages specific to your desktop setup
   ];
-};
+}

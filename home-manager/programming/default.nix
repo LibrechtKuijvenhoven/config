@@ -3,6 +3,7 @@
 {
   imports = [
     ./languages/default.nix
+    ./nixvim/default.nix
     # Add any other language configuration files here
   ];
   programs.alacritty = {
@@ -27,5 +28,6 @@
         };
         size = 16;
       };
-   }
+    };
+  };
 }

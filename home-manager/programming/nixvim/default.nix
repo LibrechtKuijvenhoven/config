@@ -4,10 +4,11 @@
   # Enable nixvim for your user
   programs.nixvim = {
     enable = true;
-
+    globals.mapleader = " ";
     # Import all your plugin configurations
     imports = [
       ./plugins/default.nix
+      ./keymaps.nix
     ];
 
     };

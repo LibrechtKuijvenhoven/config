@@ -7,9 +7,12 @@
        url = "github:nix-community/home-manager";
        inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim.url = "github:nix-community/nixvim"; # Pin to nixvim's main branch
+    nixvim.inputs.nixpkgs.follows = "nixpkgs"; # Ensure nixvim uses the same nixpkgs
   };
 
-  outputs = { self, nixpkgs,home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager,nixvim, ... }@inputs: {
     # use "nixos", or your hostname as the name of the configuration
     # it's a better practice than "default" shown in the video
     nixosConfigurations = {
@@ -22,12 +25,15 @@
 	home-manager.nixosModules.home-manager {
 	  home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
-	  home-manager.extraSpecialArgs = specialArgs;
-	  home-manager.users.librechtk = import ./home-manager/atlas-librecht.nix {
-	    inherit pkgs;
-	  }
+	  home-manager.users.librechtk = {
+	    imports = [ 
+	    	./home-manager/atlas-librecht.nix
+		nixvim.homeModules.nixvim
+	    ];
+	  };
 	}
       ];
     };
+  };
   };
 }

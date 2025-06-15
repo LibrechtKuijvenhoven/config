@@ -1,4 +1,4 @@
- config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -11,7 +11,6 @@
   home.packages = with pkgs; [
     neovim # For user, not system-wide
     zsh-syntax-highlighting
-    tmux
     fzf
     bat
     eza
@@ -21,36 +20,45 @@
     fastfetch
     lazygit
 
+
     gimp
     libreoffice-qt6-fresh
-    teams
+    brave
+    nerd-fonts.geist-mono
   ];
+
+  # fonts
+  fonts.fontconfig.enable = true;
+  #fonts.packages = with pkgs; [
+  #  nerdfonts.geist-mono
+  #];
+  #fonts.packages = with pkgs; [
+    # ... other fonts you have
+  #  nerdfonts.geist-mono
+  #] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # Example Zsh configuration
   programs.zsh = {
     enable = true;
-    ohMyZsh.enable = true; # Or enable if you prefer
+    oh-my-zsh = {
+      enable = true; # Or enable if you prefer
+      theme = "powerlevel10k";
+      plugins = [
+        "git"
+        "zsh-autosuggestions"
+        "zsh-syntax-highlighting"
+      ];
+    };
     shellAliases = {
       ll = "ls -alF";
       gc = "git commit -v";
       gs = "git status";
       update = "sudo nixos-rebuild switch --flake ~/nixos-config#\$(hostname)";
     };
-    initExtra = ''
+    initContent = ''
       # Your custom Zsh initializations
       eval "$(fzf --zsh)"
     '';
-    plugins = [
-      {
-        name = "zsh-autosuggestions";
-        src = pkgs.fetchFromGitHub {
-          owner = "zsh-users";
-          repo = "zsh-autosuggestions";
-          rev = "v0.7.0"; # Check latest tag
-          sha256 = "sha256-hash-here"; # Use nix-prefetch-url or similar
-        };
-      }
-    ];
   };
 
   programs.git = {
@@ -72,11 +80,6 @@
   xdg.userDirs.enable = true;
   
 
-  # fonts
-  fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [
-    (nerdfonts.override { fonts = ["geist-mono"];})
-  ];
   
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
