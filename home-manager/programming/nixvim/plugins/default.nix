@@ -4,6 +4,7 @@
   imports = [
     ./telescope.nix
     ./lsp.nix
+    ./web-dev-icons.nix
     #./treesitter.nix # Assuming you'll create this for syntax highlighting
     # Add any other plugin configuration files here
     # ./which-key.nix
