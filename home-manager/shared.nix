@@ -19,6 +19,7 @@
     htop
     fastfetch
     lazygit
+    tree
 
 
     gimp

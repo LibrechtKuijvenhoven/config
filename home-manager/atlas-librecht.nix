@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     discord
     spotify
+    lutris
     steam
     # Add any other packages specific to your desktop setup
   ];
