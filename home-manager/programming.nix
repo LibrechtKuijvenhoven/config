@@ -9,6 +9,7 @@
     steam
 
     tmux
+    home-manager
     # Add any other packages specific to your desktop setup
   ];
 	

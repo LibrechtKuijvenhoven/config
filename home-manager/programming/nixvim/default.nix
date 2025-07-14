@@ -10,6 +10,8 @@
       ./plugins/default.nix
       ./keymaps.nix
     ];
+    colorschemes.kanagawa.enable = true;
+    plugins.web-devicons.enable = true;
 
     };
 }
