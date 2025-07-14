@@ -5,7 +5,7 @@
      {
       mode = ["n"];
       key = "<leader>pv";
-      action = "<cmd>Neotree position=current<CR>"
+      action = "<cmd>Neotree position=current<CR>";
      }
 
   ];

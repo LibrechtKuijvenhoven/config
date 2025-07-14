@@ -11,7 +11,8 @@
     tmux
     # Add any other packages specific to your desktop setup
   ];
-  programs.tmux {
+	
+  programs.tmux = {
 	enable = true;
 	shortcut = "a";
 	baseIndex = 1;
