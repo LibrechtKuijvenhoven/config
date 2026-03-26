@@ -2,7 +2,7 @@
 
 {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim # homeManagerModules is for version 24.11 of nixvim
     ./programming/default.nix
     ../modules/programs/nvim
   ];

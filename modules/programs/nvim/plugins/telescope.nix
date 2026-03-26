@@ -1,7 +1,7 @@
 { ... }:
 {
   # Enable the plugin
-  programs.nixvim.plugins.telescope = {
+  plugins.telescope = {
     enable = true;
     # Configure telescope options
     settings = {

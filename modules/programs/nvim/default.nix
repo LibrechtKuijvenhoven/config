@@ -11,6 +11,14 @@
 	    ./plugins/tree-sitter.nix
 	    ./plugins/web-devicons.nix
 	    ./keymaps.nix
+			./languages/nix.nix
+			./languages/go.nix
+			./languages/rust.nix
+			./languages/typescript.nix
+			./languages/zig.nix
+			./languages/cpp.nix
+			./languages/haskell.nix
+			./languages/ocaml-rocq.nix
 	  ];
 	  colorschemes.kanagawa.enable = true;
 
@@ -86,5 +94,25 @@
 	    # Set highlight on search, but clear on pressing <Esc> in normal mode
 	    hlsearch = true;
 	  };
+	autoCmd = [
+	# 2 space indent
+	    {
+	      event = "FileType";
+	      pattern = [ "nix" "haskell" "ocaml" "typescript" "javascript" "html" "css" "json" "yaml" ];
+	      command = "setlocal tabstop=2 shiftwidth=2 expandtab";
+	    }
+	    # 4 space indent
+	    {
+	      event = "FileType";
+	      pattern = [ "rust" "go" "zig" "cpp" "c" "python" ];
+	      command = "setlocal tabstop=4 shiftwidth=4 expandtab";
+	    }
+	    # tabs (not spaces) — Go and C traditionally use real tabs
+	    {
+	      event = "FileType";
+	      pattern = [ "go" "cpp" "c" ];
+	      command = "setlocal tabstop=4 shiftwidth=4 noexpandtab";
+	    }
+	  ];
   };
 }
