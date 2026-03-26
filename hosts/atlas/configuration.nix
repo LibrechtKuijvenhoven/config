@@ -154,7 +154,7 @@
 
   # List services that you want to enable:
   programs.ssh = {
-    startAgent = true;
+    # startAgent = true;
     enableAskPassword = true;
 
   };

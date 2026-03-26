@@ -18,6 +18,10 @@ config, pkgs, ... }:
     pulseaudio
     pavucontrol
     wireplumber
+    wineWow
+    winetricks
+    libgcc
+    gcc
   ];
 
   # Common system-wide services

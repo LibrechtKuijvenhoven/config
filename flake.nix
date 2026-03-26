@@ -8,10 +8,13 @@
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nyx.url = "github:/LibrechtKuijvenhoven/nixvim";
+    nixvim = {
+    	url = "github:nix-community/nixvim";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager,nyx, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager,nixvim, ... }@inputs: {
     # use "nixos", or your hostname as the name of the configuration
     # it's a better practice than "default" shown in the video
     nixosConfigurations = {
@@ -24,12 +27,8 @@
 	home-manager.nixosModules.home-manager {
 	  home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
-	  home-manager.users.librechtk = {
-	    imports = [ 
-	    	./home-manager/atlas-librecht.nix
-		nyx.homeModules.nixvim
-	    ];
-	  };
+	  home-manager.extraSpecialArgs = { inherit inputs; };
+	  home-manager.users.librechtk = import ./home-manager/atlas-librecht.nix;
 	}
       ];
     };

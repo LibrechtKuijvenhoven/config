@@ -1,15 +1,16 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
+    inputs.nixvim.homeManagerModules.nixvim
     ./programming/default.nix
+    ../modules/programs/nvim
   ];
   home.username = "librechtk";
   home.homeDirectory = "/home/librechtk";
 
   # Define common home-manager packages
   home.packages = with pkgs; [
-    neovim # For user, not system-wide
     zsh-syntax-highlighting
     fzf
     bat
