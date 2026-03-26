@@ -1,5 +1,5 @@
-{ ... }:
+{ pkgs, ... }:
 {
   plugins.lsp.servers.clangd.enable = true;
-  plugins.treesitter.grammarPackages = [ "c" "cpp" ];
+  plugins.treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter-parsers; [ c cpp ];
 }

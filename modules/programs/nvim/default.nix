@@ -8,6 +8,7 @@
 	    ./plugins/lsp.nix
 	    ./plugins/neo-tree.nix
 	    ./plugins/telescope.nix
+	    ./plugins/lualine.nix
 	    ./plugins/tree-sitter.nix
 	    ./plugins/web-devicons.nix
 	    ./keymaps.nix

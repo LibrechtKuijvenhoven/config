@@ -1,5 +1,7 @@
-{ ... }:
+{ pkgs, ... }:
 {
   plugins.lsp.servers.ocamllsp.enable = true;
-  plugins.treesitter.grammarPackages = [ "ocaml" "ocaml_interface" ];
+  plugins.treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter-parsers; [ 
+		ocaml
+  ];
 }

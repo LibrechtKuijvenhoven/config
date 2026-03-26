@@ -1,6 +1,6 @@
-{...}:
+{pkgs, ...}:
 {
 	plugins.lsp.servers.nixd.enable = true;
-	plugins.treesitter.grammarPackages = [ "nix" ];
+  plugins.treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter-parsers; [ nix ];
 
 }

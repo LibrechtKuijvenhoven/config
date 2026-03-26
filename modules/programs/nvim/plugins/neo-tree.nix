@@ -2,6 +2,8 @@
 {
    plugins.neo-tree = {
      enable = true;
-     prosition = "current";
+    window = {
+     position = "current";
+    };
    };
 }
