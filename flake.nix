@@ -11,6 +11,11 @@
     nixvim = {
     	url = "github:nix-community/nixvim";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager,nixvim, ... }@inputs: {
@@ -23,12 +28,12 @@
       system = "x86_64-linux";
       modules = [
         ./hosts/atlas/configuration.nix
-	home-manager.nixosModules.home-manager {
-	  home-manager.useGlobalPkgs = true;
-	  home-manager.useUserPackages = true;
-	  home-manager.extraSpecialArgs = { inherit inputs; };
-	  home-manager.users.librechtk = import ./home-manager/atlas-librecht.nix;
-	}
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.users.librechtk = import ./home-manager/atlas-librecht.nix;
+        }
       ];
     };
   };

@@ -62,5 +62,21 @@ keymaps = [
         desc = "Move focus to the upper window";
       };
     }
+    {
+      mode = "n";
+      key = "<leader>pv";
+      action = ":Ex<CR>";
+      options = {
+        desc = "Open File explorer";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>r";
+      action = "[[:%s/\<<C-r><C-w>\>//g<Left><Left>]]";
+      options = {
+        desc = "Seard and replace word under the cursor";
+      };
+    }
   ];
 }
