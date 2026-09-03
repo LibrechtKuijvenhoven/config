@@ -34,23 +34,23 @@
           };
         };
       };
-      lvm_vg = {
-        pool = {
-          type = "lvm_vg";
-          lvs = {
-            swap = {
-              size = "8G";
-              content = {
-                type = "swap";
-              };
+    };
+    lvm_vg = {
+      pool = {
+        type = "lvm_vg";
+        lvs = {
+          swap = {
+            size = "8G";
+            content = {
+              type = "swap";
             };
-            root = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/";
-              };
+          };
+          root = {
+            size = "100%";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
             };
           };
         };
