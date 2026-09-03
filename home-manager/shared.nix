@@ -11,7 +11,6 @@
 
   # Define common home-manager packages
   home.packages = with pkgs; [
-    zsh-syntax-highlighting
     fzf
     bat
     eza
@@ -39,30 +38,6 @@
   #  nerdfonts.geist-mono
   #] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
-
-  # Example Zsh configuration
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh = {
-      enable = true; # Or enable if you prefer
-      theme = "powerlevel10k";
-      plugins = [
-        "git"
-        "zsh-autosuggestions"
-        "zsh-syntax-highlighting"
-      ];
-    };
-    shellAliases = {
-      ll = "ls -alF";
-      gc = "git commit -v";
-      gs = "git status";
-      update = "sudo nixos-rebuild switch --flake ~/nixos-config#\$(hostname)";
-    };
-    initContent = ''
-      # Your custom Zsh initializations
-      eval "$(fzf --zsh)"
-    '';
-  };
 
   programs.git = {
     enable = true;
