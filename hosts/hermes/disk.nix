@@ -26,24 +26,30 @@
                   allowDiscards = true;
                 };
                 content = {
-                  type = "gpt";
-                  partitions = {
-                    swap = {
-                      size = "4G";
-                      content = {
-                        type = "swap";
-                      };
-                    };
-                    root = {
-                      size = "100%";
-                      content = {
-                        type = "filesystem";
-                        format = "ext4";
-                        mountpoint = "/";
-                      };
-                    };
-                  };
+                  type = "lvm_pv";
+                  vg = "pool";
                 };
+              };
+            };
+          };
+        };
+      };
+      lvm_vg = {
+        pool = {
+          type = "lvm_vg";
+          lvs = {
+            swap = {
+              size = "8G";
+              content = {
+                type = "swap";
+              };
+            };
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
               };
             };
           };
