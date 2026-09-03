@@ -5,7 +5,6 @@
     inputs.nixvim.homeModules.nixvim # homeManagerModules is for version 24.11 of nixvim
     ./programming/default.nix
     ../modules/programs/nvim
-    inputs.zen-browser.homeModules.twilight
   ];
   home.username = "librechtk";
   home.homeDirectory = "/home/librechtk";
@@ -41,9 +40,6 @@
   #] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
 
-  programs.zen-browser = {
-    enable = true;
-  };
   # Example Zsh configuration
   programs.zsh = {
     enable = true;
