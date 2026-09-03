@@ -3,6 +3,7 @@
 {
   imports = [
     ./../../home-manager/shared.nix
+    ./../../home-manager/programs/zen.nix
   ];
 
 	
