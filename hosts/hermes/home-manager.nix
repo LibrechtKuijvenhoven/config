@@ -5,6 +5,7 @@
     ./../../home-manager/shared.nix
     ./../../home-manager/programs/zen.nix
     ./../../home-manager/programs/shell.nix
+    ./../../home-manager/window-manager.nix
   ];
 
 	
