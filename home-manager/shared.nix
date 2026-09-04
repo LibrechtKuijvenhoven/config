@@ -25,18 +25,8 @@
     gimp
     libreoffice-qt6-fresh
     brave
-    nerd-fonts.geist-mono
   ];
 
-  # fonts
-  fonts.fontconfig.enable = true;
-  #fonts.packages = with pkgs; [
-  #  nerdfonts.geist-mono
-  #];
-  #fonts.packages = with pkgs; [
-    # ... other fonts you have
-  #  nerdfonts.geist-mono
-  #] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
 
   programs.git = {
