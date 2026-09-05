@@ -10,7 +10,7 @@
     eslint_d
 
     yarn
-    nodePackages.prettier
+    prettier
 
     # If you prefer to manage Bun via home-manager
     # bun
