@@ -19,6 +19,8 @@
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
+  networking.useDHCP = false;
+  security.polkit.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";

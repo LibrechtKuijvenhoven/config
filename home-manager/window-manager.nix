@@ -3,13 +3,20 @@
   imports = [
     inputs.mango.hmModules.mango
   ];
+  home.packages = with pkgs; [
+    networkmanagerapplet
+    polkit_gnome
+  ];
 
   wayland.windowManager.mango = {
     enable = true;
     systemd.enable = true;
+
       # start waybar with mango
     autostart_sh = ''
       waybar &
+      /run/current-system/sw/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+  nm-applet --indicator &
     '';
     settings = {
       animations = 1;
