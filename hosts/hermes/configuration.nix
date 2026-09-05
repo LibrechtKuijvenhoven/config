@@ -21,6 +21,7 @@
   networking.networkmanager.enable = true;
   networking.useDHCP = false;
   security.polkit.enable = true;
+  security.pam.services.swaylock = {};
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
