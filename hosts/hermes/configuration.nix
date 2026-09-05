@@ -23,6 +23,9 @@
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
+  environment.systemPackages = [
+    pkgs.brightnessctl
+  ];
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -54,7 +57,7 @@
         user = "librechtk";
       };
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd mango";
+        command = "${pkgs.tuigreet}/bin/tuigreet --cmd mango";
         user = "greeter";
       };
     };

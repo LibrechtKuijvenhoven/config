@@ -7,6 +7,10 @@
   wayland.windowManager.mango = {
     enable = true;
     systemd.enable = true;
+      # start waybar with mango
+    autostart_sh = ''
+      waybar &
+    '';
     settings = {
       animations = 1;
       bordercolor = "0x595959aa";
@@ -16,13 +20,10 @@
         "SUPER,d,spawn,rofi -show drun"
         "SUPER,r,reload_config"
         "SUPER,q,killclient"
-        "SUPER SHIFT,e,quit"
+        "NONE,XF86MonBrightnessUp,spawn,brightnessctl set +5%"
+        "NONE,XF86MonBrightnessDown,spawn,brightnessctl set 5%-"
       ];
 
-      # start waybar with mango
-      autostart_sh = ''
-        waybar &
-      '';
     };
   };
 
