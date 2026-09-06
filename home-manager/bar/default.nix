@@ -1,0 +1,124 @@
+{ config, pkgs, inputs, ... }:
+{
+  imports = [
+    inputs.mango.hmModules.mango
+  ];
+  home.packages = with pkgs; [
+    networkmanagerapplet
+    hyprpolkitagent
+    swaylock
+    swayidle
+    nerd-fonts.jetbrains-mono
+    libnotify
+    playerctl
+  ];
+  programs.waybar = {
+    enable = true;
+    settings.mainBar = {
+      layer = "top";
+      position = "top";
+      height = 36;
+      spacing = 6;
+      modules-left = [ ];
+      modules-center = [ "clock" ];
+      modules-right = [ 
+        "cpu" 
+        "memory" 
+        "pulseaudio" 
+        "battery" 
+        "network"
+        "bluetooth"
+        "custom/power"
+      ];
+
+      "pulseaudio" = {
+        format = "{volume}% {icon}";
+        format-bluetooth = "{volume}% {icon}";
+        format-muted = "";
+        format-icons = {
+          headphone = "";
+          hands-free = "󰂑";
+          headset = "󰂑";
+          phone = "";
+          phone-muted = "";
+          portable = "";
+          car = "";
+          default = ["" ""];
+        };
+        scroll-step = 1;
+        on-click = "pavucontrol";
+      };
+      "cpu" = {
+        format = "{icon} {usage:>2}%";
+        format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+      };
+
+      "memory" = {
+        format = "{used:0.1f}G/{total:0.1f}G ";
+        tooltip-format = "Swap: {swapUsed:0.1f}G/{swapTotal:0.1f}G";
+      };
+      "network" = {
+        format-wifi = "{icon}";
+        format-icons = ["󰢿" "󰢼" "󰢽" "󰢾" ];
+        format-ethernet = "";
+        format-disconnected = "";
+        on-click = "nm-connection-editor";
+      };
+      "bluetooth" = {
+        format = " {status}";
+        format-connected = " {device_alias}";
+        format-connected-battery = " {device_alias} {device_battery_percentage}%";
+      };
+
+      "battery" = {
+        format = "{capacity}% {icon}";
+        states = {
+          warning  = 25;
+          critical = 10;
+        };
+        events = {
+          on-discharging-warning = "notify-send -u normal 'Low Battery'";
+          on-discharging-critical = "notify-send -u critical 'Very Low Battery'";
+          on-charging-100 = "notify-send -u normal 'Battery Full!'";
+          on-discharging = "notify-send -u normal 'Power Switch, Discharging'";
+          on-charging = "notify-send -u normal 'Power Switch, Charging'";
+        };
+        format-icons = {
+            default =  ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+            charging = ["󰢟" "󰢜" "󰂆" "󰂇" "󰂈" "󰢝" "󰂉" "󰢞" "󰂊" "󰂋" "󰂅"];
+          };
+      };
+
+      "custom/power" = {
+        format = "⏻";
+        menu = "on-click";
+        menu-file = "${config.xdg.configHome}/waybar/power_menu.xml";
+        menu-actions = {
+            shutdown = "shutdown now";
+            reboot = "reboot";
+            suspend = "systemctl suspend";
+        };
+      };
+    };
+  };
+ xdg.configFile."waybar/power_menu.xml".text = ''
+    <?xml version="1.0" encoding="UTF-8"?>
+    <interface>
+      <menu id="menu">
+        <item>
+          <attribute name="label">Sleep</attribute>
+          <attribute name="action">menu.suspend</attribute>
+        </item>
+        <item>
+          <attribute name="label">Restart</attribute>
+          <attribute name="action">menu.reboot</attribute>
+        </item>
+        <item>
+          <attribute name="label">Shutdown</attribute>
+          <attribute name="action">menu.shutdown</attribute>
+        </item>
+      </menu>
+    </interface>
+  '';
+  xdg.configFile."waybar/style.css".source = ./style.css;
+}

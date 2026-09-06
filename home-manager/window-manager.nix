@@ -2,6 +2,7 @@
 {
   imports = [
     inputs.mango.hmModules.mango
+    ./bar/default.nix
   ];
   home.packages = with pkgs; [
     networkmanagerapplet
@@ -38,12 +39,16 @@
       show-failed-attempts = true;
     };
   };
+  services.swayosd = {
+    enable = true;
+    topMargin = 0.9;
+  };
 
   services.swayidle = {
     enable = true;
     timeouts = [
-      { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -f"; }
-      { timeout = 600; command = "systemctl suspend"; }
+      { timeout = 900; command = "${pkgs.swaylock}/bin/swaylock -f"; }
+      { timeout = 1800; command = "systemctl suspend"; }
     ];
     events = [
       { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock -f"; }
@@ -77,19 +82,8 @@
     };
   };
 
-  programs.waybar = {
-    enable = true;
-    settings.mainBar = {
-      layer = "top";
-      position = "top";
-      modules-left = [ "mango/workspaces" ];
-      modules-center = [ "clock" ];
-      modules-right = [ "pulseaudio" "network" "battery" "tray" ];
     };
   };
-  # waybar under mango sometimes needs its systemd unit enabled
-  # if you switch to systemd-managed waybar instead of autostart_sh:
-  # programs.waybar.systemd.enable = true;
 
   programs.rofi = {
     enable = true;

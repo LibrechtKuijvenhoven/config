@@ -1,0 +1,42 @@
+* {
+  font-family: "GeistMono Nerd Font Mono";
+  font-size: 15px;
+  font-weight: 500;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+/* the island itself — one background per cluster */
+.modules-left,
+.modules-center,
+.modules-right {
+  background: #1F1F28;
+  border-radius: 12px;
+  padding: 4px 14px;
+  margin: 4px 2px;
+}
+
+
+#custom-seperator {
+  color: #54546D;   /* subtle divider inside an island */
+  padding: 0 2px;
+}
+
+#custom-logo   { color: #7E9CD8; font-size: 17px; }
+#workspaces button.active,
+#dwl-tags       { color: #98BB6C; }
+#window         { color: #C8C093; }
+#cpu            { color: #7AA89F; }
+#memory         { color: #957FB8; }
+#pulseaudio     { color: #FF9E3B; }
+#network        { color: #7E9CD8; }
+#bluetooth      { color: #658594; }
+#battery        { color: #98BB6C; }
+#battery.warning  { color: #DCA561; }
+#battery.critical { color: #C34043; }
+#custom-cog     { color: #DCD7BA; }
+#custom-cog:hover { color: #7E9CD8; }
+#custom-power   { color: #C34043; }
