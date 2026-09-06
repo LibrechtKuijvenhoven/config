@@ -29,6 +29,8 @@
   environment.systemPackages = [
     pkgs.brightnessctl
   ];
+  services.power-profiles-daemon.enable = true;
+  services.tlp.enable = false;  # these two conflict, PPD wins on Framework AMD
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
