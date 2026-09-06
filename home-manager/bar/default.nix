@@ -26,6 +26,7 @@
         "memory" 
         "pulseaudio" 
         "battery" 
+        "custom/power-profile" 
         "network"
         "bluetooth"
         "custom/power"
@@ -69,6 +70,10 @@
         format-connected = " {device_alias}";
         format-connected-battery = " {device_alias} {device_battery_percentage}%";
       };
+      "custom/power-profile" = {
+        exec = "~/.config/waybar/scripts/power-profile.sh";
+        on-click = "~/.config/waybar/scripts/select-power-profile.sh";
+      };
 
       "battery" = {
         format = "{capacity}% {icon}";
@@ -76,6 +81,7 @@
           warning  = 25;
           critical = 10;
         };
+        on-click = "~/.config/waybar/scripts/select-power-profile.sh";
         events = {
           on-discharging-warning = "notify-send -u normal 'Low Battery'";
           on-discharging-critical = "notify-send -u critical 'Very Low Battery'";
@@ -121,4 +127,12 @@
     </interface>
   '';
   xdg.configFile."waybar/style.css".source = ./style.css;
+  xdg.configFile."waybar/scripts/power-profile.sh" = {
+    source = ./scripts/power-profile.sh;
+    executable = true; 
+  };
+  xdg.configFile."waybar/scripts/select-power-profile.sh" = {
+    source = ./scripts/select-power-profile.sh;
+    executable = true; 
+  };
 }

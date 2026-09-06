@@ -1,7 +1,6 @@
 { config, pkgs, inputs, ... }:
 {
   imports = [
-    inputs.mango.hmModules.mango
     ./bar/default.nix
   ];
   home.packages = with pkgs; [
