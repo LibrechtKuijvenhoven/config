@@ -9,8 +9,10 @@
     hyprpolkitagent
     swaylock
     swayidle
+    nerd-fonts.jetbrains-mono
+    libnotify
+    playerctl
   ];
-
   services.dunst = {
     enable = true;
     settings = {
@@ -74,13 +76,55 @@
         "SUPER,d,spawn,rofi -show drun"
         "SUPER,r,reload_config"
         "SUPER,q,killclient"
-        "NONE,XF86MonBrightnessUp,spawn,brightnessctl set +5%"
-        "NONE,XF86MonBrightnessDown,spawn,brightnessctl set 5%-"
-        "SUPER,l,spawn,swaylock -f"
-      ];
 
-    };
-  };
+        "SUPER,Tab,focusstack,next"
+        "SUPER+SHIFT,Tab,focusstack,prev"
+        "SUPER,j,focusdir,down"
+        "SUPER,k,focusdir,up"
+        "SUPER,h,focusdir,left"
+        "SUPER,l,focusdir,right"
+
+        # Workspace/tag switching
+        "SUPER,1,view,1,0"
+        "SUPER,2,view,2,0"
+        "SUPER,3,view,3,0"
+        "SUPER,4,view,4,0"
+        "SUPER,5,view,5,0"
+        "SUPER,6,view,6,0"
+        "SUPER,7,view,7,0"
+        "SUPER,8,view,8,0"
+        "SUPER,9,view,9,0"
+
+        # Move focused window to a tag (and follow it)
+        "SUPER+SHIFT,1,tag,1,0"
+        "SUPER+SHIFT,2,tag,2,0"
+        "SUPER+SHIFT,3,tag,3,0"
+        "SUPER+SHIFT,4,tag,4,0"
+        "SUPER+SHIFT,5,tag,5,0"
+        "SUPER+SHIFT,6,tag,6,0"
+        "SUPER+SHIFT,7,tag,7,0"
+        "SUPER+SHIFT,8,tag,8,0"
+        "SUPER+SHIFT,9,tag,9,0"
+
+        # Sequential tag navigation (adjacent tag left/right)
+        "CTRL+ALT,Left,viewtoleft,0"
+        "CTRL+ALT,Right,viewtoright,0"
+
+        "SUPER+SHIFT,l,spawn,swaylock -f"
+
+        "NONE,XF86MonBrightnessUp,spawn,swayosd-client --brightness raise"
+        "NONE,XF86MonBrightnessDown,spawn,swayosd-client --brightness lower"
+
+        # Volume
+        "NONE,XF86AudioRaiseVolume,spawn,swayosd-client --output-volume raise"
+        "NONE,XF86AudioLowerVolume,spawn,swayosd-client --output-volume lower"
+        "NONE,XF86AudioMute,spawn,swayosd-client --output-volume mute-toggle"
+
+        # Playback
+        "NONE,XF86AudioPlay,spawn,swayosd-client --playerctl play-pause"
+        "NONE,XF86AudioNext,spawn,swayosd-client --playerctl next"
+        "NONE,XF86AudioPrev,spawn,swayosd-client --playerctl prev"
+      ];
 
     };
   };
