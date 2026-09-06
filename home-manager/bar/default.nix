@@ -19,7 +19,7 @@
       position = "top";
       height = 36;
       spacing = 6;
-      modules-left = [ ];
+      modules-left = [ "mango/workspaces" "mango/window"];
       modules-center = [ "clock" ];
       modules-right = [ 
         "cpu" 
@@ -33,8 +33,8 @@
       ];
 
       "pulseaudio" = {
-        format = "{volume}% {icon}";
-        format-bluetooth = "{volume}% {icon}";
+        format = "{volume}% <span size='x-large'>{icon}</span>";
+        format-bluetooth = "{volume}% <span size='x-large'>{icon}</span>";
         format-muted = "";
         format-icons = {
           headphone = "";
@@ -50,33 +50,34 @@
         on-click = "pavucontrol";
       };
       "cpu" = {
-        format = "{icon} {usage:>2}%";
+        format = "<span size='x-large'>{icon}</span> {usage:>2}%";
         format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
       };
 
       "memory" = {
-        format = "{used:0.1f}G/{total:0.1f}G ";
+        format = "{used:0.1f}G/{total:0.1f}G <span size='x-large'></span>";
         tooltip-format = "Swap: {swapUsed:0.1f}G/{swapTotal:0.1f}G";
       };
       "network" = {
-        format-wifi = "{icon}";
+        format-wifi = "<span size='x-large'>{icon}</span>";
         format-icons = ["󰢿" "󰢼" "󰢽" "󰢾" ];
         format-ethernet = "";
         format-disconnected = "";
         on-click = "nm-connection-editor";
       };
       "bluetooth" = {
-        format = " {status}";
+        format = "<span size='x-large'></span> {status}";
         format-connected = " {device_alias}";
         format-connected-battery = " {device_alias} {device_battery_percentage}%";
       };
       "custom/power-profile" = {
         exec = "~/.config/waybar/scripts/power-profile.sh";
+        interval = 1;
         on-click = "~/.config/waybar/scripts/select-power-profile.sh";
       };
 
       "battery" = {
-        format = "{capacity}% {icon}";
+        format = "{capacity}% <span size='x-large'>{icon}</span>";
         states = {
           warning  = 25;
           critical = 10;
@@ -96,7 +97,7 @@
       };
 
       "custom/power" = {
-        format = "⏻";
+        format = "<span size='x-large'>⏻</span>";
         menu = "on-click";
         menu-file = "${config.xdg.configHome}/waybar/power_menu.xml";
         menu-actions = {

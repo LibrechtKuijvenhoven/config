@@ -2,7 +2,8 @@
 
 current=$(powerprofilesctl get)
 case "$current" in
-  performance) printf '󰓅' ;;
-  balanced) printf '󰾅' ;;
-  power-saver) printf '󰾆' ;;
+  performance) icon='󰓅' ;;
+  balanced) icon='󰾅' ;;
+  power-saver) icon='󰾆' ;;
 esac
+printf '<span size="x-large">%s</span>' "$icon"
