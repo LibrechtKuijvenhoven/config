@@ -66,6 +66,9 @@
     };
   };
   
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;  
+  services.blueman.enable = true;  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
