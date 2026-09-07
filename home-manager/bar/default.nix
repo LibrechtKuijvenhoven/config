@@ -1,7 +1,6 @@
 { config, pkgs, inputs, ... }:
 {
   imports = [
-    inputs.mango.hmModules.mango
   ];
   home.packages = with pkgs; [
     networkmanagerapplet
@@ -19,7 +18,7 @@
       position = "top";
       height = 36;
       spacing = 6;
-      modules-left = [ "mango/workspaces" "mango/window"];
+      modules-left = [ "hyprland/workspaces" "hyprland/window"];
       modules-center = [ "clock" ];
       modules-right = [ 
         "cpu" 
@@ -48,6 +47,14 @@
         };
         scroll-step = 1;
         on-click = "pavucontrol";
+      };
+      "hyprland/window" = {
+        format = "{}";
+        rewrite = {
+          "(.*) - Zen Browser" = "󰖟 $1";
+          "(.*) - zsh" = "> [$1]";
+          "nvim (.*)" = " [$1]";
+        };
       };
       "cpu" = {
         format = "<span size='x-large'>{icon}</span> {usage:>2}%";

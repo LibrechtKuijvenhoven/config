@@ -50,19 +50,19 @@
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
-  services.displayManager.defaultSession = "mango"; # or "gnome" if you want that as default
+  services.displayManager.defaultSession = "hyprland"; # or "gnome" if you want that as default
 
-  programs.mango.enable = true;
+  programs.hyprland.enable = true;
 
   services.greetd = {
     enable = true;
     settings = {
       initial_session = {
-        command = "mango";
+        command = "Hyprland";
         user = "librechtk";
       };
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --cmd mango";
+        command = "${pkgs.tuigreet}/bin/tuigreet --cmd Hyprland";
         user = "greeter";
       };
     };

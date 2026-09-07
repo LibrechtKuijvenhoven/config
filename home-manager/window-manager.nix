@@ -56,75 +56,88 @@
     ];
   };
 
-  wayland.windowManager.mango = {
+  wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
 
-      # start waybar with mango
-    autostart_sh = ''
-      waybar &
-      ${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent &
-  nm-applet --indicator &
-    '';
     settings = {
-      animations = 1;
-      bordercolor = "0x595959aa";
+      "$mod" = "SUPER";
 
-      bind = [
-        "SUPER,Return,spawn,kitty"
-        "SUPER,d,spawn,rofi -show drun"
-        "SUPER,r,reload_config"
-        "SUPER,q,killclient"
-
-        "SUPER,Tab,focusstack,next"
-        "SUPER+SHIFT,Tab,focusstack,prev"
-        "SUPER,j,focusdir,down"
-        "SUPER,k,focusdir,up"
-        "SUPER,h,focusdir,left"
-        "SUPER,l,focusdir,right"
-
-        # Workspace/tag switching
-        "SUPER,1,view,1,0"
-        "SUPER,2,view,2,0"
-        "SUPER,3,view,3,0"
-        "SUPER,4,view,4,0"
-        "SUPER,5,view,5,0"
-        "SUPER,6,view,6,0"
-        "SUPER,7,view,7,0"
-        "SUPER,8,view,8,0"
-        "SUPER,9,view,9,0"
-
-        # Move focused window to a tag (and follow it)
-        "SUPER+SHIFT,1,tag,1,0"
-        "SUPER+SHIFT,2,tag,2,0"
-        "SUPER+SHIFT,3,tag,3,0"
-        "SUPER+SHIFT,4,tag,4,0"
-        "SUPER+SHIFT,5,tag,5,0"
-        "SUPER+SHIFT,6,tag,6,0"
-        "SUPER+SHIFT,7,tag,7,0"
-        "SUPER+SHIFT,8,tag,8,0"
-        "SUPER+SHIFT,9,tag,9,0"
-
-        # Sequential tag navigation (adjacent tag left/right)
-        "CTRL+ALT,Left,viewtoleft,0"
-        "CTRL+ALT,Right,viewtoright,0"
-
-        "SUPER+SHIFT,l,spawn,swaylock -f"
-
-        "NONE,XF86MonBrightnessUp,spawn,swayosd-client --brightness raise"
-        "NONE,XF86MonBrightnessDown,spawn,swayosd-client --brightness lower"
-
-        # Volume
-        "NONE,XF86AudioRaiseVolume,spawn,swayosd-client --output-volume raise"
-        "NONE,XF86AudioLowerVolume,spawn,swayosd-client --output-volume lower"
-        "NONE,XF86AudioMute,spawn,swayosd-client --output-volume mute-toggle"
-
-        # Playback
-        "NONE,XF86AudioPlay,spawn,swayosd-client --playerctl play-pause"
-        "NONE,XF86AudioNext,spawn,swayosd-client --playerctl next"
-        "NONE,XF86AudioPrev,spawn,swayosd-client --playerctl prev"
+      exec-once = [
+        "waybar"
+        "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent"
+        "nm-applet --indicator"
+        "blueman-applet"
       ];
 
+      general = {
+        gaps_in = 4;
+        gaps_out = 8;
+        border_size = 2;
+        "col.active_border" = "rgba(7E9CD8ff)";
+        "col.inactive_border" = "rgba(59595999)";
+      };
+
+      decoration = {
+        rounding = 10;
+      };
+
+      animations = {
+        enabled = true;
+      };
+
+      bind = [
+        # apps
+        "$mod, Return, exec, kitty"
+        "$mod, D, exec, rofi -show drun"
+        "$mod, Q, killactive"
+        "$mod SHIFT, E, exit"
+        "$mod, L, exec, swaylock -f"
+
+        # focus movement (vim-style)
+        "$mod, h, movefocus, l"
+        "$mod, j, movefocus, d"
+        "$mod, k, movefocus, u"
+        "$mod, l, movefocus, r"   # note: same key as swaylock bind above — see note below
+
+        # workspaces
+        "$mod, 1, workspace, 1"
+        "$mod, 2, workspace, 2"
+        "$mod, 3, workspace, 3"
+        "$mod, 4, workspace, 4"
+        "$mod, 5, workspace, 5"
+        "$mod, 6, workspace, 6"
+        "$mod, 7, workspace, 7"
+        "$mod, 8, workspace, 8"
+        "$mod, 9, workspace, 9"
+
+        # move window to workspace
+        "$mod SHIFT, 1, movetoworkspace, 1"
+        "$mod SHIFT, 2, movetoworkspace, 2"
+        "$mod SHIFT, 3, movetoworkspace, 3"
+        "$mod SHIFT, 4, movetoworkspace, 4"
+        "$mod SHIFT, 5, movetoworkspace, 5"
+        "$mod SHIFT, 6, movetoworkspace, 6"
+        "$mod SHIFT, 7, movetoworkspace, 7"
+        "$mod SHIFT, 8, movetoworkspace, 8"
+        "$mod SHIFT, 9, movetoworkspace, 9"
+      ];
+
+      bindel = [
+        # volume/brightness use bindel: repeats while held, doesn't need window focus
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
+        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+      ];
+
+      bindl = [
+        # media keys: fire once per press, no repeat
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, playerctl previous"
+      ];
     };
   };
 

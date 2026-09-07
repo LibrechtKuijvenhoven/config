@@ -15,8 +15,8 @@
     nixvim = {
     	url = "github:nix-community/nixvim";
     };
-    mango = {
-      url = "github:mangowm/mango";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
@@ -26,7 +26,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager,disko, mango, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager,disko, hyprland, ... }@inputs: {
     # use "nixos", or your hostname as the name of the configuration
     # it's a better practice than "default" shown in the video
     nixosConfigurations = {
@@ -49,7 +49,6 @@
       system = "x86_64-linux";
       modules = [
         ./hosts/hermes/configuration.nix
-        mango.nixosModules.mango
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
