@@ -6,6 +6,7 @@
     ./../../home-manager/programs/zen.nix
     ./../../home-manager/programs/shell.nix
     ./../../home-manager/programs/pdf-viewer.nix
+    ./../../home-manager/programs/file-manager.nix
     ./../../home-manager/window-manager.nix
   ];
 
